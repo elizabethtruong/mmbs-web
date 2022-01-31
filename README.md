@@ -1,4 +1,4 @@
-# music-booking-system-web
+# mmbs-web
 
 ## Project setup
 ```
