@@ -1,4 +1,3 @@
-
 <template>
 <div id="cList">
 
@@ -271,7 +270,7 @@ export default {
 
 </script>
 
-<!--<style lang="scss">
+<style lang="scss">
 
   #button {
   width: 125px;
@@ -316,7 +315,7 @@ export default {
 
 }
 
-</style>-->
+</style>
 
 <!--<template>
       
@@ -512,51 +511,4 @@ created(){
 }
  
 };
-</script>
-
-<style lang="scss">
-
-  #button {
-  width: 125px;
-  height: 40px;
-  font-size: 100%;
-  color: black;
-  border: 1px solid black;
-  background-color: white;
-}
-
-
-#navigation4 {
-  padding: 0;
-  margin-top: -115px;
-  width: 150px;
-  background-color: rgb(60, 156, 255);
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-  font-size: 150%;
-
-  a {
-    font-weight: bold;
-    color: black;
-    display: block;
-    padding: 16px;
-    &.router-link-exact-active {
-      background-color: #1364b3;
-      color: white;
-      text-decoration: none;
-    }
-  }
-
-  button {
-  width: 125px;
-  height: 40px;
-  font-size: 100%;
-  color: black;
-  border: 1px solid black;
-  background-color: white;
-}
-
-}
-
-</style>-->
+</script>-->
