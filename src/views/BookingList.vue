@@ -4,16 +4,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.3.10/vuetify.css"/>
     </header>
     <top-header></top-header>
-    <div id="navigation3">
-      <router-link to="/">Home</router-link>
-      <!--<router-link to="/login">Login</router-link>-->
-      <router-link to="/bookingcalendar">Bookings</router-link>
-      <router-link to="/bookinglist"><img src="../assets/icon-transparent.png" alt="MMBSLogo" width="125" height="125">Bookings List</router-link>
-      <router-link to="/clients">Clients</router-link>
-      <router-link to="/documents">Documents</router-link>
-      <button class="but" @click="signOut">Sign out</button>
-    </div>
-    <router-view />
     <div ref="document">
 
 
@@ -126,28 +116,7 @@ export default {
     },     
 
 created(){
-
-  /*db.collection("calEvent").get().then((querySnapshot) => {
-        //this.product = querySnapshot
-        const promises = [];
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never defined for query doc snapshots
-            promises.push(doc.orderBy("date").equalTo("2021-11-26")); 
-        });
-            return Promise.all(promises);
-    }).then(results => {
-            //console.log(results);
-            results.forEach(querySnapshot => {
-                querySnapshot.forEach(event => {
-                    this.calEvent.push(event.val());
-                });     
-            });
-
-  });*/
-
-
-
-        
+       
     db.collection("calEvent").get().then((querySnapshot) => {
         //this.product = querySnapshot
         querySnapshot.forEach((doc) => {
@@ -156,12 +125,8 @@ created(){
     });
 });
 
-
-
 }
 
-
- 
 };
 </script>
 

@@ -1,44 +1,46 @@
 <template>
   <div id="app">
-    
-    <div id="nav" style="background-color:rgb(35, 35, 35);">
-      <!--<router-link to="/">Home</router-link> |-->
-      <router-link to="/login"><img src="./assets/icon-transparent.png" alt="MMBSLogo" width="50" height="50"></router-link>
-      <!--<router-link to="/bookingcalendar">Booking Calendar</router-link>-->
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/calendar">Calendar</router-link> |
+      <router-link to="/bList">Bookings List</router-link> |
+      <router-link to="/clients">Clients</router-link>
+      <!-- <router-link to="/documents">Documents</router-link> | -->
+      <!-- <router-link to="/log">Log Out</router-link> -->
     </div>
-    <!--<h2 style="color:black">Music Matters Bookings</h2>-->
-    <router-view />
-    
+    <router-view/>
   </div>
 </template>
 
+<body></body>
 
 <style lang="scss">
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: black;
-  //background-color: rgb(35, 35, 35);
-
+  color: #2c3e50;
 }
-
 
 #nav {
   padding: 30px;
+  font-size: 25px;
+  border: 2px solid black;
+  background-color: #1E88E5;
 
   a {
     font-weight: bold;
-    color: black;
-    //display: block;
-    //padding: 16px;
+    color: #2c3e50;
+
     &.router-link-exact-active {
-      background-color: #1364b3;
-      //color: white;
-      //text-decoration: none;
+      color: #FFFFFF;
     }
   }
+}
+
+body {
+  background-color: #F5F5F5;
 }
 </style>
 

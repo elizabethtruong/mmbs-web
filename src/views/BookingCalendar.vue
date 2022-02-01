@@ -1,26 +1,11 @@
 <template>
-  <div id="bCalendar">
-    <header></header>
-    <top-header></top-header>
-    <div id="navigation2">
-      <router-link to="/">Home</router-link>
-      <!--<router-link to="/login">Login</router-link>-->
-      <router-link to="/bookingcalendar"><img src="../assets/icon-transparent.png" alt="MMBSLogo" width="125" height="125">Bookings</router-link>
-      <router-link to="/bookinglist">Bookings List</router-link>
-      <router-link to="/clients">Clients</router-link>
-      <router-link to="/documents">Documents</router-link>
-      <button class="but" @click="signOut">Sign out</button>
-    </div>
-    <router-view />
     <v-app class="mx-auto"
       max-width="700"
-      style="margin-left: 150px; background-color:rgb(35, 35, 35);">
+      style="background-color:rgb(35, 35, 35);">
     <v-content>
       <Calendar/>
     </v-content>
     </v-app>
- 
-  </div>
 </template>
 
 <script>

@@ -27,14 +27,14 @@ const routes = [
   },
 
   {
-    path: "/bookingcalendar",
+    path: "/calendar",
     name: "BookingCalendar",
     component: BookingCalendar,
     //meta: { requiresAuth: true }
   },
 
   {
-    path: "/bookinglist",
+    path: "/bList",
     name: "bookinglist",
     component: BookingList,
     //meta: { requiresAuth: true }

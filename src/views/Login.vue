@@ -20,7 +20,7 @@
 			<img src="../assets/icon.png" alt="MMBSLogo" width="160" height="160">
 			<br>
       
-			<p>© Music Matters 2021</p>
+			<p>© Music Matters 2022</p>
 		</center>
     <div class="error" v-if="error">{{ error.message }}</div>
   </div>
