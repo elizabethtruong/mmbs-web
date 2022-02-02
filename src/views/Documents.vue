@@ -1,8 +1,9 @@
 <template>
-  <div class="home">
-    <h1>Welcome to Music Matters Booking System</h1>
-    <img alt="Music Matters logo" src="../assets/icon-transparent.png" width="400" height="400">
-    <h2>©2022</h2>
+  <div id="documentsGenerated">
+      <center>
+            <h2>Music Matters Documents</h2>
+            <p>Artist invoices and booking confirmations to be found here</p>
+        </center>
   </div>
 </template>
 
@@ -53,56 +54,8 @@ export default {
 
 <style lang="scss">
 
-//   #button {
-//   width: 125px;
-//   height: 40px;
-//   font-size: 100%;
-//   color: black;
-//   border: 1px solid black;
-//   background-color: white;
-// }
-
-// h2 {
-//     font-size: 200%;
-//     color: rgb(255, 255, 255);
-//   }
-
-// p {
-//     font-size: 200%;
-//     color: rgb(255, 255, 255);
-//   }
-
-// #navigation5 {
-//   padding: 0;
-//   margin-top: -115px;
-//   width: 150px;
-//   background-color: rgb(60, 156, 255);
-//   position: fixed;
-//   height: 100%;
-//   overflow: auto;
-//   font-size: 150%;
-
-//   a {
-//     font-weight: bold;
-//     color: black;
-//     display: block;
-//     padding: 16px;
-//     &.router-link-exact-active {
-//       background-color: #1364b3;
-//       color: white;
-//       text-decoration: none;
-//     }
-//   }
-
-//   button {
-//   width: 125px;
-//   height: 40px;
-//   font-size: 100%;
-//   color: black;
-//   border: 1px solid black;
-//   background-color: white;
-// }
-
-//}
+h1 {
+  padding: 50px;
+}
 
 </style>

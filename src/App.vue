@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div class="routing" id="nav" v-if="this.$route.path !== '/login'">
       <router-link to="/">Home</router-link> |
       <router-link to="/calendar">Calendar</router-link> |
       <router-link to="/bList">Bookings List</router-link> |
-      <router-link to="/clients">Clients</router-link>
-      <!-- <router-link to="/documents">Documents</router-link> | -->
-      <!-- <router-link to="/log">Log Out</router-link> -->
+      <router-link to="/clients">Clients</router-link> |
+      <router-link to="/documents">Documents</router-link> | 
+      <router-link to="/login">Log Out</router-link>
     </div>
     <router-view/>
   </div>
