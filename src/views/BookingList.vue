@@ -7,9 +7,7 @@
     <div ref="document">
 
 
-    <v-app class="mx-auto"
-      max-width="700"
-      style="margin-left: 150px;">
+    <v-app>
 
             
         <table> 
@@ -69,9 +67,9 @@ export default {
      return {
          calEvent: [],
          booking: {
-             clientName:null,
-             start:null,
-             conmpesation:null
+             clientName: null,
+             start: null,
+             compensation: null
 
          },
       blah: "erik",

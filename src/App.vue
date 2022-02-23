@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <div class="routing" id="nav" v-if="this.$route.path !== '/login'">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/calendar">Calendar</router-link> |
+    <div class="routing" id="nav" v-if="this.$route.path !== '/'">
+      <router-link to="/home">Home</router-link> |
+      <router-link to="/calendar">Venues</router-link> |
       <router-link to="/bList">Bookings List</router-link> |
       <router-link to="/clients">Clients</router-link> |
       <router-link to="/documents">Documents</router-link> | 
-      <router-link to="/login">Log Out</router-link>
+      <router-link to="/">Log Out</router-link>
     </div>
     <router-view/>
   </div>
@@ -27,7 +27,7 @@
   padding: 30px;
   font-size: 25px;
   border: 2px solid black;
-  background-color: #1E88E5;
+  background-color: #2196f3;
 
   a {
     font-weight: bold;

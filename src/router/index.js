@@ -9,19 +9,32 @@ import BookingCalendar from '../views/BookingCalendar.vue';
 import BookingList from '../views/BookingList.vue';
 import Clients from '../views/Clients.vue';
 import Documents from '../views/Documents.vue';
+import Venues from '../views/Venues.vue';
 
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home,
-    //meta: { requiresAuth: true }
+    meta: { 
+      requiresAuth: true 
+    }
   },
+
   {
-    path: "/login",
+    path: "/venues",
+    name: "Venues",
+    component: Venues,
+    meta: { 
+      requiresAuth: true 
+    }
+  },
+
+  {
+    path: "/",
     name: "login",
     component: Login
   },
@@ -30,21 +43,27 @@ const routes = [
     path: "/calendar",
     name: "BookingCalendar",
     component: BookingCalendar,
-    //meta: { requiresAuth: true }
+    meta: { 
+      requiresAuth: true 
+    }
   },
 
   {
     path: "/bList",
     name: "bookinglist",
     component: BookingList,
-    //meta: { requiresAuth: true }
+    meta: { 
+      requiresAuth: true 
+    }
   },
 
   {
     path: "/clients",
     name: "clients",
     component: Clients,
-    //meta: { requiresAuth: true }
+    meta: { 
+      requiresAuth: true 
+    }
   },
 
 
@@ -52,8 +71,16 @@ const routes = [
     path: "/documents",
     name: "documents",
     component: Documents,
-    //meta: { requiresAuth: true }
+    meta: { 
+      requiresAuth: true 
+    }
   },
+
+  // If page does not exist, redirect to login
+  {
+    path: "*",
+    redirect: '/'
+  }
 
 ];
 
@@ -68,7 +95,7 @@ router.beforeEach((to, from, next) => {
   const isAuthenticated = firebase.auth().currentUser;
   console.log("isauthenticated", isAuthenticated);
   if (requiresAuth && !isAuthenticated) {
-    next("/login");
+    next("/");
   } else {
     next();
   }

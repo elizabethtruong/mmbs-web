@@ -2,43 +2,47 @@
   <v-row class="fill-height">
     <v-col>
       <v-sheet height="64">
-        <v-toolbar flat color="white">
-          <v-btn color="primary" dark @click.stop="dialog = true">
-            New Event
-          </v-btn>
-          <v-btn outlined class="mr-4" @click="setToday">
+        <v-toolbar 
+          flat
+        >
+          <v-btn
+            outlined 
+            class="mr-4"
+            color="grey darken-2"
+            @click="setToday"
+          >
             Today
           </v-btn>
-          <v-btn fab text small @click="prev">
-            <v-icon small>mdi-chevron-left</v-icon>
+          <v-btn
+            fab 
+            text 
+            small
+            color="grey darken-2"
+            @click="prev"
+          >
+            <v-icon small>
+              mdi-chevron-left
+            </v-icon>
           </v-btn>
-          <v-btn fab text small @click="next">
-            <v-icon small>mdi-chevron-right</v-icon>
+          <v-btn 
+            fab 
+            text 
+            small 
+            @click="next"
+          >
+            <v-icon small>
+              mdi-chevron-right
+            </v-icon>
           </v-btn>
-          <v-toolbar-title>{{ title }}</v-toolbar-title>
-          <div class="flex-grow-1"></div>
-          <v-menu bottom right>
-            <template v-slot:activator="{ on }">
-              <v-btn outlined v-on="on">
-                <span>{{ typeToLabel[type] }}</span>
-                <v-icon right>mdi-menu-down</v-icon>
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item @click="type = 'day'">
-                <v-list-item-title>Day</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = 'week'">
-                <v-list-item-title>Week</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = 'month'">
-                <v-list-item-title>Month</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = '4day'">
-                <v-list-item-title>4 days</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+          <v-toolbar-title>
+            {{ title }}
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn 
+            dark 
+            @click.stop="dialog = true">
+            New Event
+          </v-btn>
         </v-toolbar>
       </v-sheet>
 
@@ -51,7 +55,7 @@
               <v-text-field v-model="date" type="date" label="date (required)"></v-text-field>
               <v-text-field v-model="start" type="time" label="start (required)"></v-text-field>
               <v-text-field v-model="end" type="time" label="end (required)"></v-text-field>
-              <v-text-field v-model="venue" type="text" label="venue (required)"></v-text-field>
+              <!-- <v-text-field v-model="venue" type="text" label="venue (required)"></v-text-field> -->
               <v-text-field v-model="price" type="number" label="price (required)"></v-text-field>
               <v-text-field v-model="details" type="text" label="details"></v-text-field>
               <v-text-field v-model="color" type="color" label="color (click to open color menu)"></v-text-field>
@@ -72,7 +76,7 @@
               <v-text-field v-model="date" type="date" label="date (required)"></v-text-field>
               <v-text-field v-model="start" type="time" label="start (required)"></v-text-field>
               <v-text-field v-model="end" type="time" label="end (required)"></v-text-field>
-              <v-text-field v-model="venue" type="text" label="venue (required)"></v-text-field>
+              <!-- <v-text-field v-model="venue" type="text" label="venue (required)"></v-text-field> -->
               <v-text-field v-model="price" type="number" label="price (required)"></v-text-field>
               <v-text-field v-model="details" type="text" label="details"></v-text-field>
               <v-text-field v-model="color" type="color" label="color (click to open color menu)"></v-text-field>
@@ -119,7 +123,7 @@
     <v-card-text>
       <form v-if="currentlyEditing !== selectedEvent.id">
         {{ selectedEvent.clientName }} {{ '$' + selectedEvent.price }}
-        {{ selectedEvent.start }} {{ selectedEvent.end }} {{ selectedEvent.venue }}
+        {{ selectedEvent.start }} {{ selectedEvent.end }}
       </form>
       <form v-else>
         <textarea-autosize
@@ -135,7 +139,7 @@
       <v-text-field v-model="selectedEvent.date" type="date" label="date (required)"></v-text-field>
       <v-text-field v-model="selectedEvent.start" type="time" label="start (required)"></v-text-field>
       <v-text-field v-model="selectedEvent.end" type="time" label="end (required)"></v-text-field>
-      <v-text-field v-model="selectedEvent.venue" type="text" label="venue (required)"></v-text-field>
+      <!-- <v-text-field v-model="selectedEvent.venue" type="text" label="venue (required)"></v-text-field> -->
       <v-text-field v-model="selectedEvent.price" type="number" label="price (required)"></v-text-field>
       <v-text-field v-model="selectedEvent.color" type="color" label="color (click to open color menu)"></v-text-field>
     </form>
@@ -161,25 +165,25 @@
 
 
 <script>
-import { db } from '@/main'
-export default {
-  data: () => ({
-    today: new Date().toISOString().substr(0, 10),
-    focus: new Date().toISOString().substr(0, 10),
-    type: 'month',
-    typeToLabel: {
-      month: 'Month',
-      week: 'Week',
-      day: 'Day',
-      '4day': '4 Days',
-    },
+  import { db } from '@/main'
+
+  export default {
+    data: () => ({
+      today: new Date().toISOString().substr(0, 10),
+      focus: new Date().toISOString().substr(0, 10),
+      type: 'month',
+      typeToLabel: {
+        month: 'Month',
+        week: 'Week',
+        day: 'Day',
+      },
     eventName: null,
     clientName: null,
     date: null,
     start: null,
     end: null,
-    venue: null,
-    price:null,
+    // venue: null,
+    price: null,
     details: null,
     color: '#1976D2', // default event color
     currentlyEditing: null,
@@ -200,21 +204,11 @@ export default {
         return ''
       }
       const startMonth = this.monthFormatter(start)
-      const endMonth = this.monthFormatter(end)
-      const suffixMonth = startMonth === endMonth ? '' : endMonth
       const startYear = start.year
-      const endYear = end.year
-      const suffixYear = startYear === endYear ? '' : endYear
-      const startDay = start.day + this.nth(start.day)
-      const endDay = end.day + this.nth(end.day)
+
       switch (this.type) {
         case 'month':
         return `${startMonth} ${startYear}`
-        case 'week':
-        case '4day':
-        return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`
-        case 'day':
-        return `${startMonth} ${startDay} ${startYear}`
       }
       return ''
     },
@@ -225,6 +219,8 @@ export default {
       })
     }
   },
+  
+
   
   methods: {
     async getEvents () {
@@ -269,7 +265,7 @@ export default {
           date: this.date,
           start: this.date + ' ' + this.start,
           end: this.date + ' ' + this.end,
-          venue: this.venue,
+          // venue: this.venue,
           price: this.price,
           details: this.details,
           color: this.color
@@ -280,7 +276,7 @@ export default {
         this.date = '',
         this.start = '',
         this.end = '',
-        this.venue = '',
+        // this.venue = '',
         this.price = '',
         this.details = '',
         this.color = ''
@@ -298,7 +294,7 @@ export default {
         date: ev.date,
         start: ev.date + ' ' + ev.start,
         end: ev.date + ' ' + ev.end,
-        venue: ev.venue,
+        // venue: ev.venue,
         price: ev.price,
         details: ev.details,
         color: ev.color
