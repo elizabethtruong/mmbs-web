@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>Welcome to Music Matters Booking System</h1>
-    <img alt="Music Matters logo" src="../assets/icon-transparent.png" width="400" height="400">
+    <img alt="Music Matters logo" src="../assets/icon-transparent.png" width="350" height="350">
     <h2>©2022</h2>
   </div>
 </template>

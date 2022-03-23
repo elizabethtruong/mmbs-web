@@ -1,8 +1,7 @@
 <template>
-  <div style="#F5F5F5">
+  <div>
     <center>
-			<h1>Welcome to Music Matters Booking System</h1>
-			<h2>Login Portal:</h2>
+			<h1>Music Matters BS Login Portal:</h1>
 		</center>
     <form @submit.prevent="pressed">
       <div class="login">
@@ -12,12 +11,12 @@
         <input type="password" placeholder="password" v-model="password" />
       </div>
 
-      <button style="background-color:rgb(30, 136, 229); width:400px; height:75px; font-size:125%;">Sign In</button>
+      <button style="background-color:rgb(30, 136, 229); width:250px; height:75px; font-size:125%;">Sign In</button>
        
     </form>
     <center>
 			<br>
-			<img src="../assets/icon-transparent.png" alt="MMBSLogo" width="160" height="160">
+			<img src="../assets/icon-transparent.png" alt="MMBSLogo" width="80" height="80">
 			<br>
       
 			<p>© Music Matters 2022</p>
@@ -79,11 +78,11 @@ input {
   padding: 30px;
   margin: 20px;
   font-size: 21px;
-  background-color: white;
+  background-color: #ECEFF1;
 }
 
 .error {
-  color: red;
+  color: white;
 }
 
 </style>

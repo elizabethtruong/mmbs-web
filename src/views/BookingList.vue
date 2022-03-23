@@ -1,15 +1,7 @@
 <template>
-  <div id="content" class="content">
-    <header>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.3.10/vuetify.css"/>
-    </header>
-    <top-header></top-header>
-    <div ref="document">
-
+<div ref="document">
 
     <v-app>
-
-            
         <table> 
             <caption style="font-size: 30px; font-weight: bold;">The Exchange Live Music Bookings<br>  <span> by Date  </span> <br> <span> Month Year </span>
                   </caption>
@@ -22,29 +14,21 @@
                </tr>
 
             </thead> 
-            
+
             <tbody> 
                 <tr v-for="booking in calEvent" :key=booking.id>
-                    <td>{{booking.clientName}}</td>
+                    <td>{{booking.start[8] + booking.start[9] + '-' + booking.name}}</td>
                     <td>{{booking.start + ' to ' + booking.end}}</td>
                     <td>{{ '$' + booking.price}}</td>
                 </tr>
             </tbody>
         </table>
-<div class="text-xs-center; mt-10">
-        <button  style="background-color:rgb(60, 156, 255); width: 125px;height: 35px; font-size: 100%;" @click="exportToPDF">
-          Download PDF</button>
-
-</div>
-
- 
+        <div class="text-xs-center; mt-10">
+                <button  style="background-color:rgb(60, 156, 255); width: 125px;height: 35px; font-size: 100%;" @click="exportToPDF">
+                  Download PDF</button>
+        </div>
     </v-app>
-
     </div>
-    
-  </div>
-
-
 </template>
 
 

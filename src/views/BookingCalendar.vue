@@ -1,106 +1,57 @@
 <template>
-    <v-app class="mx-auto"
-      max-width="700"
-      style="background-color:rgb(35, 35, 35);">
-    <v-content>
-      <Calendar/>
-    </v-content>
+  <div>
+    <v-app>
+       <v-content>
+          <Calendar/>
+        </v-content>
+        <input 
+          type="button" value="Generate PDF" 
+          style="background-color: #4CAF50; width: 125px; height: 35px; font-size: 100%; margin-left: 50%; margin-bottom: 80px;" @click="generateReport">
+    <vue-html2pdf 
+        :show-layout="false" 
+        :float-layout="true" 
+        :enable-download="true" 
+        :preview-modal="false" 
+        :paginate-elements-by-height="1400" 
+        filename="calendar" 
+        :pdf-quality="2" 
+        :manual-pagination="false" 
+        pdf-format="a4" 
+        pdf-orientation="landscape" 
+        pdf-content-width="1125px" 
+        @progress="onProgress($event)" 
+        @hasStartedGeneration="hasStartedGeneration()" 
+        @hasGenerated="hasGenerated($event)" 
+        ref="html2Pdf" 
+    > 
+
+        <section slot="pdf-content"> 
+          <section class="pdf-content">
+            <Calendar/>
+          </section>
+        </section> 
+
+    </vue-html2pdf> 
     </v-app>
+  </div>
 </template>
 
 <script>
-import firebase from "firebase/compat/app";
-import "firebase/auth";
+
+import VueHtml2pdf from 'vue-html2pdf'
 import Calendar from '../components/Calendar';
 export default {
-  name: 'App',
+  name: 'BookingCal',
   components: {
     Calendar,
-  },
-  mounted() {
-    this.setupFirebase();
+    VueHtml2pdf
   },
 
   methods: {
-    setupFirebase() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          // User is signed in.
-          console.log("signed in");
-          this.loggedIn = true;
-        } else {
-          // No user is signed in.
-          this.loggedIn = false;
-          console.log("signed out", this.loggedIn);
-        }
-      });
-    },
-    signOut() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$router.replace({ name: "login" });
-        });
-    },
-  },
-
-
-  data: () => {
-     return {
-      blah: "erik",
-      loggedIn:false,
-    };
-  },
-};
-</script>
-
-<style lang="scss">
-
-  #button {
-  width: 125px;
-  height: 40px;
-  font-size: 100%;
-  color: black;
-  border: 1px solid black;
-  background-color: white;
-}
-
-
-
-#navigation2 {
-  padding: 0;
-  margin-top: -115px;
-  width: 150px;
-  background-color: rgb(60, 156, 255);
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-  font-size: 150%;
-
-  a {
-    font-weight: bold;
-    color: black;
-    display: block;
-    padding: 16px;
-    &.router-link-exact-active {
-      background-color: #1364b3;
-      color: white;
-      text-decoration: none;
-    }
+    generateReport () { 
+      this.$refs.html2Pdf.generatePdf() 
+    } 
   }
-
-  button {
-  width: 125px;
-  height: 40px;
-  font-size: 100%;
-  color: black;
-  border: 1px solid black;
-  background-color: white;
 }
 
-}
-
-
-
-</style>
+</script>

@@ -3,7 +3,7 @@
     <v-data-table
         :headers="headers"
         :items="clients"
-        sort-by="performer"
+        sort-by="performers"
         class="elevation-1"
     >
     <template v-slot:top>
@@ -34,92 +34,69 @@
                 New Client
             </v-btn>
         </template>
+        
         <v-card>
             <v-card-title>
             <span class="text-h5">New Client</span>
             </v-card-title>
-
             <v-card-text>
                 <v-container>
-                    <v-row>
-                        <v-col
-                            cols="12"
-                            sm="6"
-                        >
+                  <v-form>
+
                             <v-text-field
-                            v-model="editedItem.performer"
+                            v-model="editedItem.performers"
                             label="Performer(s)*"
                             required
                             ></v-text-field>
-                        </v-col>
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="4"
-                        >
+
                             <v-text-field
                             v-model="editedItem.stage"
                             label="Stage*"
                             required
                             ></v-text-field>
-                        </v-col>
-                        <v-col
-                            cols="12"
-                            sm="6"
-                        >
+
+
                             <v-text-field
                             v-model="editedItem.email"
                             label="Email*"
                             required
                             ></v-text-field>
-                        </v-col>
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="4"
-                        >
+
                             <v-text-field
-                            v-model="editedItem.number"
+                            v-model="editedItem.phoneNumber"
                             label="Phone Number*"
                             required
                             ></v-text-field>
-                        </v-col>
-                        <v-col
-                            cols="12"
-                            sm="6"
-                            md="4"
-                        >
+
                             <v-select
-                            v-model="editedItem.split"
+                            v-model="editedItem.splitCheck"
                             :items="['Yes', 'No']"
                             label="Split Check*"
                             required
                             ></v-select>
-                        </v-col>
-                    </v-row>
+                            
+                            <small>*indicates required field</small>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                                color="blue darken-1"
+                                text
+                                @click="close"
+                            >
+                                Cancel
+                            </v-btn>
+                            <v-btn
+                                color="blue darken-1"
+                                text
+                                @click="save"
+                            >
+                                Save
+                            </v-btn>
+                  </v-form>
                 </v-container>
-            <small>*indicates required field</small>
             </v-card-text>
-            
-            <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-                color="blue darken-1"
-                text
-                @click="close"
-            >
-                Cancel
-            </v-btn>
-            <v-btn
-                color="blue darken-1"
-                text
-                @click="save"
-            >
-                Save
-            </v-btn>
-        </v-card-actions>
     </v-card>
     </v-dialog>
+    
     <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
             <v-card-title class="text-h5">Are you sure you want to delete this client?</v-card-title>
@@ -161,6 +138,8 @@
 </template>
 
 <script>
+  import { db } from '@/main'
+
   export default {
     data: () => ({
       dialog: false,
@@ -169,32 +148,34 @@
           text: 'Performer(s)',
           align: 'start',
           sortable: false,
-          value: 'performer',
+          value: 'performers',
         },
         { text: 'Stage', value: 'stage' },
         { text: 'Email', value: 'email' },
-        { text: 'Phone Number', value: 'number' },
-        { text: 'Split Check?', value: 'split' },
+        { text: 'Phone Number', value: 'phoneNumber' },
+        { text: 'Split Check?', value: 'splitCheck' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       clients: [],
       editedIndex: -1,
       editedItem: {
-        performer: '',
-        stage: '',
-        email: '',
-        number: '',
-        split: '',
+        performers: null,
+        stage: null,
+        email: null,
+        phoneNumber: null,
+        splitCheck: null,
       },
       defaultItem: {
-        performer: '',
+        performers: '',
         stage: '',
         email: '',
-        number: '',
-        split: '',
+        phoneNumber: '',
+        splitCheck: '',
       },
     }),
-
+    mounted () {
+      this.getClients()
+    },
     computed: {
       formTitle () {
         return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
@@ -213,7 +194,54 @@
     },
 
     methods: {
-        editItem (item) {
+      async getClients () {
+        let snapshot = await db.collection('clients').get()
+        const clients = []
+        snapshot.forEach(doc => {
+          let appData = doc.data();
+          appData.id = doc.id;
+          clients.push(appData);
+        })
+        this.clients = clients;
+      },
+      getClientName () {
+        return document.getElementById('performers').value
+      },
+      async addClient () {
+        if (this.performers && this.email && this.phoneNumber && this.stage && this.splitCheck) {
+          this.save()
+          await db.collection('clients').add({
+            performers: this.performers,
+            stage: this.stage,
+            email: this.email,
+            phoneNumber: this.phoneNumber,
+            splitCheck: this.splitCheck,
+          })
+          this.getClients()
+          this.performers = '',
+          this.stage = '',
+          this.email = '',
+          this.phoneNumber = '',
+          this.splitCheck = ''
+        } else {
+          alert('You must enter all client information')
+        }
+      },
+      async updateClient (item) {
+        await db.collection('clients').doc.update({
+          clientName: item.performers,
+          stage: item.stage,
+          email: item.email,
+          phoneNumber: item.phoneNumber,
+          splitCheck: item.splitCheck
+        })
+      },
+      async deleteClient (item) {
+        await db.collection("clients").doc(item).delete()
+        this.selectedOpen = false,
+        this.getClients()
+    },
+      editItem (item) {
         this.editedIndex = this.clients.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true

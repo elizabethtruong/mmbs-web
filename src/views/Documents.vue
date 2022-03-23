@@ -1,15 +1,30 @@
 <template>
   <div id="documentsGenerated">
-      <center>
-            <h2>Music Matters Documents</h2>
-            <p>Artist invoices and booking confirmations to be found here</p>
-        </center>
+     <h1 class="subheading black--text">Music Matters Documents</h1>
+     <v-container class="my-5">
+       <v-layout row wrap>
+         <v-flex xs12 sm6 md4 lg3 v-for="doc in docTypes" :key="doc.type">
+           <v-card class="text-xs-center ma-3">
+             <v-responsive class="pt-4">
+               image goes here
+             </v-responsive>
+             <v-card-text>
+               <div class="subheading">{{ doc.type }}</div>
+             </v-card-text>
+             <v-card-actions>
+               <v-btn depressed class="transparent">
+                 <v-icon left small>mdi-login</v-icon>
+                 <span>View</span>
+               </v-btn>
+             </v-card-actions>
+            </v-card>
+         </v-flex>
+       </v-layout>
+     </v-container>
   </div>
 </template>
 
 <script>
-import firebase from "firebase/compat/app";
-import "firebase/auth";
 export default {
   name: 'documents',
   components: {
@@ -18,44 +33,15 @@ export default {
     this.setupFirebase();
   },
 
-  methods: {
-    setupFirebase() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          // User is signed in.
-          console.log("signed in");
-          this.loggedIn = true;
-        } else {
-          // No user is signed in.
-          this.loggedIn = false;
-          console.log("signed out", this.loggedIn);
-        }
-      });
-    },
-    signOut() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$router.replace({ name: "login" });
-        });
-    },
-  },
-
-
   data: () => {
      return {
-      blah: "erik",
-      loggedIn:false,
+       docTypes: [
+         { type: 'Calendars' },
+         { type: 'Invoices' },
+         { type: 'Booking Lists'},
+         { type: 'Confirmations'}
+       ]
     };
   },
 };
 </script>
-
-<style lang="scss">
-
-h1 {
-  padding: 50px;
-}
-
-</style>
